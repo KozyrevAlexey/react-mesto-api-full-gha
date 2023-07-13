@@ -150,8 +150,8 @@ function App() {
       auth.getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
-          setEmail(res.data.email);
-          navigate("/");
+          setEmail(res.user.email);
+          // navigate("/");
         })
         .catch(err => console.log(err));
     }
@@ -159,7 +159,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
-  }, []);
+  }, [loggedIn]);
 
   function handleLogin(password, email) {
     auth.authorize(password, email)
