@@ -32,6 +32,8 @@ function App() {
   const [tooltipTitle, setTooltipTitle] = useState('')
   const [tooltipIcon, setTooltipIcon] = useState('')
 
+  // const [emailUser, setEmailUser] = useState('')
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -159,7 +161,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
-  }, [loggedIn]);
+  }, []);
 
   function handleLogin(password, email) {
     auth.authorize(password, email)

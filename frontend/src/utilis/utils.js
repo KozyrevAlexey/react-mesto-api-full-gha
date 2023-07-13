@@ -11,10 +11,10 @@ const formValidationConfig = {
 
 /**Данные для обращения к серверу */
 const apiConfig = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-62',
+  url: 'http://api.kamesto.nomoreparties.sbs',
   headers:{
     'Content-Type': "application/json",
-    authorization: '433d83bc-6b8b-4de8-9d1d-be42c9389f4e'
+    // authorization: '433d83bc-6b8b-4de8-9d1d-be42c9389f4e'
   }
 }
 
