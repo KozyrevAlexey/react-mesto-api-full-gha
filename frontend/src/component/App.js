@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom"
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import Header from "./Header";
 import Main from "./Main.js";
 import Footer from "./Footer";
@@ -31,8 +31,6 @@ function App() {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false)
   const [tooltipTitle, setTooltipTitle] = useState('')
   const [tooltipIcon, setTooltipIcon] = useState('')
-
-  // const [emailUser, setEmailUser] = useState('')
 
   const navigate = useNavigate();
 
@@ -146,22 +144,31 @@ function App() {
     setIsInfoTooltipPopupOpen(true);
   }
 
-  function checkToken() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
+  // function checkToken() {
+  //   const jwt = localStorage.getItem('jwt');
+  //   if (jwt) {
+  //     auth.getContent(jwt)
+  //       .then((res) => {
+  //         setLoggedIn(true);
+  //         setEmail(res.user.email);
+  //         navigate("/");
+  //       })
+  //       .catch(err => console.log(err));
+  //   }
+  // }
+
+  useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
       auth.getContent(jwt)
         .then((res) => {
           setLoggedIn(true);
           setEmail(res.user.email);
-          // navigate("/");
+          navigate("/", {replace: true});
         })
         .catch(err => console.log(err));
     }
-  }
-
-  useEffect(() => {
-    checkToken();
-  }, []);
+  }, [navigate]);
 
   function handleLogin(password, email) {
     auth.authorize(password, email)

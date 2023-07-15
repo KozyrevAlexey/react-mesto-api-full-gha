@@ -10,12 +10,16 @@ const formValidationConfig = {
 }
 
 /**Данные для обращения к серверу */
-const apiConfig = {
-  url: 'http://api.kamesto.nomoreparties.sbs',
+const apiConfig =  {
+  url: 'http://localhost:3000/',
+  // url: 'http://api.kamesto.nomoreparties.sbs',
+
   headers:{
     'Content-Type': "application/json",
+
     // authorization: '433d83bc-6b8b-4de8-9d1d-be42c9389f4e'
-  }
+  },
+  credentials: 'include'
 }
 
 export { formValidationConfig, apiConfig };
