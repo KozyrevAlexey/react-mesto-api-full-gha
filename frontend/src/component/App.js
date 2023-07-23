@@ -171,11 +171,11 @@ function App() {
   }, [navigate]);
 
   function handleLogin(password, email) {
-    auth.authorize(password, email)
+    auth.authorize({password, email})
       .then(res => {
         localStorage.setItem('jwt', res.token)
         setLoggedIn(true);
-        navigate("/")
+        navigate("/", {replace: true})
       })
       .catch(err => {
         onError();
@@ -185,9 +185,9 @@ function App() {
   }
 
   function handleRegister(password, email) {
-    auth.register(password, email)
+    auth.register({password, email})
       .then(() => {
-        navigate("/sign_in");
+        navigate("/sign_in", {replace: true});
         onRegister();
       })
       .catch(err => {

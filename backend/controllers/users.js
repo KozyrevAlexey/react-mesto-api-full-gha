@@ -7,8 +7,9 @@ const ErrorAuth = require('../errors/errorAuth');
 const ErrorConflict = require('../errors/errorConflict');
 const ErrorValidation = require('../errors/errorValidation');
 const ErrorNotFound = require('../errors/errorNotFound');
-const errorDefault = require('../errors/errorDefault');
+// const errorDefault = require('../errors/errorDefault');
 const ErrorDefault = require('../errors/errorDefault');
+const { JWT_SECRET, NODE_ENV } = require('../utils/constant');
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -63,7 +64,7 @@ const updateProfileUser = (req, res, next) => {
     })
 };
 
-const updateAvatarUser = (req, res) => {
+const updateAvatarUser = (req, res, next) => {
   const { avatar } = req.body;
   const { _id } = req.user;
   User.findByIdAndUpdate(_id, { avatar }, { new: true, runValidators: true })
@@ -79,20 +80,21 @@ const updateAvatarUser = (req, res) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  User.findOne({ email })
+ User.findOne({ email })
     .select('+password')
     .orFail(() => new ErrorAuth('Пользователь не найден'))
     .then((user) => {
       bcrypt.compare(password, user.password)
         .then((isValidUser) => {
           if (isValidUser) {
-            const jwt = jsonWebToken.sign({ _id: user._id }, 'SECRET');
-            res.cookie('jwt', jwt, {
-              maxAge: 36000000,
-              httpOnly: true,
-              sameSite: true,
-            })
-            res.send(user)
+            const jwt = jsonWebToken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {expiresIn: '7d'});
+            // res.cookie('jwt', jwt, {
+            //   maxAge: 36000000,
+            //   httpOnly: true,
+            //   sameSite: true,
+            // })
+            // res.send(user)
+            res.status(200).send({token: jwt});
           } else {
             throw new ErrorAuth('Неправильный пароль');
           }

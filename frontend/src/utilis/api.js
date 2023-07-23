@@ -21,22 +21,30 @@ class Api {
 
   /**Запросить данные с сервера */
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}cards`, {
       // headers: {
       //   authorization: this._authorization
       // },
-      headers: this._headers,
-      credentials: this._credentials
+      // headers: this._headers,
+      // credentials: this._credentials
+      method: 'GET',
+      headers: {
+        "Contint-Type": "application/json",
+        autorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
     })
       .then(res => this._checkResponse(res))
   }
 
   /**Функция добавления новой карточки на сервер */
   addNewCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
-      headers: this._headers,
-      credentials: this._credentails,
+      //
+      headers: {
+        "Contint-Type": "application/json",
+        autorization: `Bearer ${localStorage.getItem('jwt')}`
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -47,21 +55,30 @@ class Api {
 
   /**Функция получения данных пользователя с сервера*/
   getUserInfoApi() {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}users/me`, {
+      method: 'GET',
       // headers: {
       //   authorization: this._authorization
       // },
-      headers: this._headers,
-      credentials: this._credentails,
+      // headers: this._headers,
+      // credentials: this._credentails,
+      headers: {
+        "Contint-Type": "application/json",
+        autorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
     })
       .then(res => this._checkResponse(res))
   }
 
   /**Функция передачи данных пользователя с сервера */
   setUserInfoApi(data) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      // headers: this._headers,
+      headers: {
+        "Contint-Type": "application/json",
+        autorization: `Bearer ${localStorage.getItem('jwt')}`
+      },
       credentials: this._credentails,
       body: JSON.stringify({
         name: data.name,
@@ -73,10 +90,14 @@ class Api {
 
   /**Функция передачи на сервер нового аватара */
   setUserAvatar(data) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
-      credentials: this._credentails,
+      // headers: this._headers,
+      // credentials: this._credentails,
+      headers: {
+        "Contint-Type": "application/json",
+        autorization: `Bearer ${localStorage.getItem('jwt')}`
+      },
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -86,10 +107,14 @@ class Api {
 
   /**Функция удаления карточки с сервера */
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
-      credentials: this._credentails,
+      // headers: this._headers,
+      // credentials: this._credentails,
+      headers: {
+        "Contint-Type": "application/json",
+        autorization: `Bearer ${localStorage.getItem('jwt')}`
+      },
     })
       .then(res => this._checkResponse(res))
   }
@@ -97,17 +122,27 @@ class Api {
   /**Функция переключения лайка */
   changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: this._headers,
-        credentials: this._credentails,
+        // headers: this._headers,
+        // credentials: this._credentails,
+        headers: {
+          "Contint-Type": "application/json",
+          autorization: `Bearer ${localStorage.getItem('jwt')}`
+        },
+        credentials: 'include'
       })
         .then(res => this._checkResponse(res))
     } else {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: this._headers,
-        credentials: this._credentails,
+        // headers: this._headers,
+        // credentials: this._credentails,
+        headers: {
+          "Contint-Type": "application/json",
+          autorization: `Bearer ${localStorage.getItem('jwt')}`
+        },
+        credentials: 'include'
       })
         .then(res => this._checkResponse(res))
     }
