@@ -165,18 +165,18 @@ function App() {
         .then((res) => {
           setLoggedIn(true);
           setEmail(res.email);
-          navigate("/", {replace: true});
+          navigate("/", { replace: true });
         })
         .catch(err => console.log(err));
     }
   }, [navigate]);
 
   function handleLogin(password, email) {
-    auth.authorize({password, email})
+    auth.authorize({ password, email })
       .then(res => {
         localStorage.setItem('jwt', res.token)
         setLoggedIn(true);
-        navigate("/", {replace: true})
+        navigate("/", { replace: true })
       })
       .catch(err => {
         onError();
@@ -186,9 +186,9 @@ function App() {
   }
 
   function handleRegister(password, email) {
-    auth.register({password, email})
+    auth.register({ password, email })
       .then(() => {
-        navigate("/sign_in", {replace: true});
+        navigate("/sign_in", { replace: true });
         onRegister();
       })
       .catch(err => {

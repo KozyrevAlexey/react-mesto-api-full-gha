@@ -79,15 +79,15 @@ const updateAvatarUser = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
- User.findOne({ email })
+  User.findOne({ email })
     .select('+password')
     .orFail(() => new ErrorAuth('Пользователь не найден'))
     .then((user) => {
       bcrypt.compare(password, user.password)
         .then((isValidUser) => {
           if (isValidUser) {
-            const jwt = jsonWebToken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {expiresIn: '7d'});
-            res.status(200).send({token: jwt});
+            const jwt = jsonWebToken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+            res.status(200).send({ token: jwt });
           } else {
             throw new ErrorAuth('Неправильный пароль');
           }

@@ -1,15 +1,7 @@
-// import { apiConfig } from "./utils"
-
 class Api {
-  // constructor(config) {
-  //   this._url = config.url;
-  //   this._headers = config.headers;
-  //   this._authorization = config.headers['authorization'];
-  //   this._credentials = config.credentials;
-  // }
-    constructor({baseUrl}) {
-      this._baseUrl = baseUrl;
-    }
+  constructor({ baseUrl }) {
+    this._baseUrl = baseUrl;
+  }
 
   /**Проверить на ошибки */
   _checkResponse(res) {
@@ -22,11 +14,6 @@ class Api {
   /**Запросить данные с сервера */
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
-      // headers: {
-      //   authorization: this._authorization
-      // },
-      // headers: this._headers,
-      // credentials: this._credentials
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -57,11 +44,6 @@ class Api {
   getUserInfoApi() {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'GET',
-      // headers: {
-      //   authorization: this._authorization
-      // },
-      // headers: this._headers,
-      // credentials: this._credentails,
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -74,7 +56,6 @@ class Api {
   setUserInfoApi(data) {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
-      // headers: this._headers,
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -92,8 +73,6 @@ class Api {
   setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
-      // headers: this._headers,
-      // credentials: this._credentails,
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -109,8 +88,6 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
-      // headers: this._headers,
-      // credentials: this._credentails,
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -124,8 +101,6 @@ class Api {
     if (isLiked) {
       return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'DELETE',
-        // headers: this._headers,
-        // credentials: this._credentails,
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -136,8 +111,6 @@ class Api {
     } else {
       return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
         method: 'PUT',
-        // headers: this._headers,
-        // credentials: this._credentails,
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -147,8 +120,7 @@ class Api {
         .then(res => this._checkResponse(res))
     }
   }
-
 }
 
-// export const api = new Api(apiConfig);
-export const api = new Api({baseUrl: 'http://localhost:3000/'});
+// export const api = new Api({baseUrl: 'http://localhost:3000/'});
+export const api = new Api({ baseUrl: 'https://api.kamesto.nomoreparties.sbs' });
