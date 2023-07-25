@@ -29,8 +29,8 @@ class Api {
       // credentials: this._credentials
       method: 'GET',
       headers: {
-        "Contint-Type": "application/json",
-        autorization: `Bearer ${localStorage.getItem('jwt')}`
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(res => this._checkResponse(res))
@@ -42,8 +42,8 @@ class Api {
       method: 'POST',
       //
       headers: {
-        "Contint-Type": "application/json",
-        autorization: `Bearer ${localStorage.getItem('jwt')}`
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
       },
       body: JSON.stringify({
         name: data.name,
@@ -63,8 +63,8 @@ class Api {
       // headers: this._headers,
       // credentials: this._credentails,
       headers: {
-        "Contint-Type": "application/json",
-        autorization: `Bearer ${localStorage.getItem('jwt')}`
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(res => this._checkResponse(res))
@@ -76,8 +76,8 @@ class Api {
       method: 'PATCH',
       // headers: this._headers,
       headers: {
-        "Contint-Type": "application/json",
-        autorization: `Bearer ${localStorage.getItem('jwt')}`
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
       },
       credentials: this._credentails,
       body: JSON.stringify({
@@ -95,8 +95,8 @@ class Api {
       // headers: this._headers,
       // credentials: this._credentails,
       headers: {
-        "Contint-Type": "application/json",
-        autorization: `Bearer ${localStorage.getItem('jwt')}`
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
       },
       body: JSON.stringify({
         avatar: data.avatar,
@@ -112,8 +112,8 @@ class Api {
       // headers: this._headers,
       // credentials: this._credentails,
       headers: {
-        "Contint-Type": "application/json",
-        autorization: `Bearer ${localStorage.getItem('jwt')}`
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
       },
     })
       .then(res => this._checkResponse(res))
@@ -127,8 +127,8 @@ class Api {
         // headers: this._headers,
         // credentials: this._credentails,
         headers: {
-          "Contint-Type": "application/json",
-          autorization: `Bearer ${localStorage.getItem('jwt')}`
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem('jwt')}`
         },
         credentials: 'include'
       })
@@ -139,8 +139,8 @@ class Api {
         // headers: this._headers,
         // credentials: this._credentails,
         headers: {
-          "Contint-Type": "application/json",
-          autorization: `Bearer ${localStorage.getItem('jwt')}`
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem('jwt')}`
         },
         credentials: 'include'
       })
