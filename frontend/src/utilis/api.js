@@ -123,4 +123,4 @@ class Api {
 }
 
 // export const api = new Api({baseUrl: 'http://localhost:3000/'});
-export const api = new Api({ baseUrl: 'https://api.kamesto.nomoreparties.sbs' });
+export const api = new Api({ baseUrl: 'https://api.kamesto.nomoreparties.sbs/' });

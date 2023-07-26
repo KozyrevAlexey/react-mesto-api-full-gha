@@ -1,5 +1,5 @@
 // export const BASE_URL = "http://localhost:3000/";
-export const BASE_URL = "https://api.kamesto.nomoreparties.sbs";
+export const BASE_URL = "https://api.kamesto.nomoreparties.sbs/";
 
 function checkResponse(res) {
   if (res.ok) {
