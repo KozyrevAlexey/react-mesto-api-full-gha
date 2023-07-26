@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 62.84.116.198
+IP-адрес 62.84.117.141
 
 Frontend https://kamesto.nomoreparties.sbs
 
