@@ -29,7 +29,7 @@ const deliteCardById = (req, res, next) => {
     .orFail(() => new ErrorNotFound(`Карточка для удаления не найдена`))
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
-        card.deleteOne(card)
+        Card.deleteOne()
           .then((cards) => res.send(cards))
           .catch(next)
       } else {

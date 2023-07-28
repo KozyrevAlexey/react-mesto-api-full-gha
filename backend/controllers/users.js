@@ -7,7 +7,6 @@ const ErrorAuth = require('../errors/errorAuth');
 const ErrorConflict = require('../errors/errorConflict');
 const ErrorValidation = require('../errors/errorValidation');
 const ErrorNotFound = require('../errors/errorNotFound');
-const ErrorDefault = require('../errors/errorDefault');
 const { JWT_SECRET, NODE_ENV } = require('../utils/constant');
 
 const getUsers = (req, res, next) => {
@@ -28,8 +27,9 @@ const getUserBuId = (req, res, next) => {
     .catch((err) => {
       if (err.name === "CastError") {
         next(new ErrorValidation(`Переданные данные некорректны`));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -43,10 +43,10 @@ const createUser = (req, res, next) => {
         next(new ErrorValidation(`Переданные данные некорректны`));
       } else if (err.code === 11000) {
         next(new ErrorConflict(`Такой e-mail уже зарегистрирован`));
+      } else {
+        next(err);
       }
-      next(err);
-    }
-    );
+    });
 }
 
 const updateProfileUser = (req, res, next) => {
@@ -58,7 +58,7 @@ const updateProfileUser = (req, res, next) => {
       if (err.name === "ValidationError") {
         next(new ErrorValidation(`Переданные данные некорректны`));
       } else {
-        next(new ErrorDefault(`На сервере произошла ошибка`));
+        next(err);
       }
     })
 };
@@ -72,7 +72,7 @@ const updateAvatarUser = (req, res, next) => {
       if (err.name === "ValidationError") {
         next(new ErrorValidation(`Переданные данные некорректны`));
       } else {
-        next(new ErrorDefault(`На сервере произошла ошибка`));
+        next(err);
       }
     })
 }
