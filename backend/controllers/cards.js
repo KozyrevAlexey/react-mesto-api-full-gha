@@ -25,12 +25,12 @@ const createCard = (req, res, next) => {
 }
 
 const deliteCardById = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findById(req.params.cardId)
     .orFail(() => new ErrorNotFound(`Карточка для удаления не найдена`))
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
-        Card.deleteOne()
-          .then((cards) => res.send(cards))
+        Card.deleteOne(card)
+          .then(() => res.send({ data: card }))
           .catch(next)
       } else {
         throw new ErrorForbidden('Чужую карточку удалить нельзя')
